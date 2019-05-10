@@ -1,0 +1,150 @@
+{
+  "name": "au-project",
+  "type": "project:application",
+  "bundler": {
+    "id": "webpack",
+    "displayName": "Webpack"
+  },
+  "httpProtocol": {
+    "id": "http1",
+    "displayName": "HTTP/1.1"
+  },
+  "build": {
+    "options": {
+      "server": "dev",
+      "extractCss": "prod",
+      "coverage": false
+    },
+    "bundles": [{
+        "name": "app-bundle.js",
+        "source": [
+          "**/*.{js,json,css,html}"
+        ]
+      },
+      {
+        "name": "vendor-bundle.js",
+        "prepend": [
+          "node_modules/bluebird/js/browser/bluebird.core.js",
+          "node_modules/jquery/dist/jquery.js",
+          "node_modules/popper.js/dist/umd/popper.min.js",
+          {
+            "path": "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird-no-long-stacktraces.js",
+            "env": "stage & prod"
+          },
+          {
+            "path": "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird.js",
+            "env": "dev"
+          },
+          "node_modules/@babel/polyfill/browser.js",
+          "node_modules/requirejs/require.js"
+        ],
+        "dependencies": [
+          "aurelia-bootstrapper",
+          "aurelia-loader-default",
+          "aurelia-pal-browser",
+          {
+            "name": "aurelia-testing",
+            "env": "dev"
+          },
+          "jquery",
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": [
+              "jquery"
+            ],
+            "exports": "$",
+            "resources": [
+              "css/bootstrap.css"
+            ]
+          },
+          {
+            "name": "popper.js",
+            "path": "../node_modules/popper.js/dist/umd",
+            "main": "popper.min"
+          },
+          "text"
+        ]
+      }
+    ],
+    "loader": {
+      "type": "require",
+      "configTarget": "vendor-bundle.js",
+      "includeBundleMetadataInConfig": "auto",
+      "config": {
+        "baseUrl": "/"
+      },
+      "plugins": [{
+        "name": "text",
+        "extensions": [
+          ".html",
+          ".css"
+        ],
+        "stub": true
+      }]
+    }
+  },
+  "platform": {
+    "id": "web",
+    "displayName": "Web",
+    "hmr": false,
+    "open": false,
+    "port": 8080,
+    "output": "dist"
+  },
+  "loader": {
+    "id": "none",
+    "displayName": "None"
+  },
+  "transpiler": {
+    "id": "babel",
+    "displayName": "Babel",
+    "fileExtension": ".js"
+  },
+  "markupProcessor": {
+    "id": "minimum",
+    "displayName": "Minimal Minification",
+    "fileExtension": ".html"
+  },
+  "cssProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".css"
+  },
+  "jsonProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".json"
+  },
+  "editor": {
+    "id": "vscode",
+    "displayName": "Visual Studio Code"
+  },
+  "unitTestRunners": [{
+      "id": "jest",
+      "displayName": "Jest"
+    },
+    {
+      "id": "karma",
+      "displayName": "Karma"
+    }
+  ],
+  "integrationTestRunner": {
+    "id": "none",
+    "displayName": "None"
+  },
+  "paths": {
+    "root": "src",
+    "resources": "resources",
+    "elements": "resources/elements",
+    "attributes": "resources/attributes",
+    "valueConverters": "resources/value-converters",
+    "bindingBehaviors": "resources/binding-behaviors"
+  },
+  "testFramework": {
+    "id": "jasmine",
+    "displayName": "Jasmine"
+  },
+  "packageManager": "npm"
+}

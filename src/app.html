@@ -1,0 +1,44 @@
+<template>
+  <require from="./styles.css"></require>
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <th>Class</th>
+        <th>Students</th>
+        <th>Pass</th>
+        <th>Fail</th>
+      </thead>
+      <tbody>
+        <tr repeat.for="eachClass of table1Data">
+          <td><a href="" click.delegate="displayStudentDetail(eachClass.name)">${eachClass.name}</a></td>
+          <td>${eachClass.totalNoOfStudents}</td>
+          <td>${eachClass.pass}</td>
+          <td>${eachClass.fail}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <table show.bind="showDetail" class="table table-bordered ">
+    <thead>
+      <th>Name</th>
+      <th>Maths</th>
+      <th>Science</th>
+      <th>English</th>
+      <th>Geography</th>
+      <th>History</th>
+    </thead>
+    <tbody>
+      <tr repeat.for="student of table2Data">
+        <td>${student.studentName}</td>
+        <td>${student.Maths}</td>
+        <td>${student.Science}</td>
+        <td>${student.English}</td>
+        <td>${student.Geography}</td>
+        <td>${student.History}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</template>
